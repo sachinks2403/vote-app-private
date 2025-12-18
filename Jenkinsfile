@@ -6,9 +6,9 @@ pipeline{
                 sh "docker login -u sachinaws90 -p Suja2403@"
                 sh '''
                  cd vote
-                 docker build -t yogesh010/vote:v${BUILD_NUMBER} .
+                 docker build -t sachinaws90/vote:v${BUILD_NUMBER} .
                  '''
-                sh "docker push yogesh010/vote:v${BUILD_NUMBER}"
+                sh "docker push sachinaws90/vote:v${BUILD_NUMBER}"
             }
         }
         stage("Parallel Tests") {
