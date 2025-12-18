@@ -8,12 +8,14 @@ pipeline{
                     agent { label 'windows' }
                     steps {
                             sh "echo Running Unit Tests"
+						    sh sleep 180
                 }
             }
                 stage("Integration Tests") {
                     agent { label 'linux' }
                     steps {
                             sh "echo Running Integration Tests"
+						    sh sleep 180
                 }
             }
 
