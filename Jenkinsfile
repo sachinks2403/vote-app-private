@@ -1,17 +1,8 @@
 pipeline{
     agent {label 'worker'}
     stages{
-        stage("Docker image build and push"){
-            steps{
-                sh "docker login -u sachinaws90 -p Suja2403@"
-                sh '''
-                 cd vote
-                 docker build -t sachinaws90/vote:v${BUILD_NUMBER} .
-                 '''
-                sh "docker push sachinaws90/vote:v${BUILD_NUMBER}"
-            }
-        }
-        stage("Parallel Tests") {
+	
+		stage("Parallel Tests") {
             parallel{
                 stage("Unit Tests") {
                     agent { label 'windows' }
@@ -28,7 +19,18 @@ pipeline{
 
         }
     }
-        stage("deploy"){
+
+        stage("Docker image build and push"){
+            steps{
+                sh "docker login -u sachinaws90 -p Suja2403@"
+                sh '''
+                 cd vote
+                 docker build -t sachinaws90/vote:v${BUILD_NUMBER} .
+                 '''
+                sh "docker push sachinaws90/vote:v${BUILD_NUMBER}"
+            }
+        }
+                stage("deploy"){
             agent {label 'worker'}
             steps{ sh "echo starting deployment"
             }
